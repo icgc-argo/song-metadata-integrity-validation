@@ -1,0 +1,173 @@
+{
+  "aggs": {
+    "donor": {
+      "terms": {
+        "field": "samples.donor.donorId"
+      },
+      "aggs": {
+        "t_n": {
+          "terms": {
+            "field": "samples.specimen.tumourNormalDesignation"
+          },
+          "aggs": {
+            "sample": {
+              "terms": {
+                "field": "samples.sampleId"
+              },
+              "aggs": {
+                "subSampleId": {
+                  "terms": {
+                    "field": "samples.submitterSampleId"
+                  }
+                },
+                "experimental_strategy": {
+                  "terms": {
+                    "field": "experiment.experimental_strategy"
+                  },
+                  "aggs": {
+                    "matchedNorm": {
+                      "terms": {
+                        "field": "samples.matchedNormalSubmitterSampleId"
+                      }
+                    },
+                    "wf": {
+                      "terms": {
+                        "field": "workflow.workflow_name",
+                        "missing": "N/A"
+                      },
+                      "aggs": {
+                        "analysis_type": {
+                          "terms": {
+                            "field": "analysisType.name"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "wf": {
+          "terms": {
+            "field": "workflow.workflow_name",
+            "missing": "N/A"
+          },
+          "aggs": {
+            "t_n": {
+              "terms": {
+                "field": "samples.specimen.tumourNormalDesignation"
+              },
+              "aggs": {
+                "sample": {
+                  "terms": {
+                    "field": "samples.sampleId"
+                  },
+                  "aggs": {
+                    "subSampleId": {
+                      "terms": {
+                        "field": "samples.submitterSampleId"
+                      }
+                    },
+                    "experimental_strategy": {
+                      "terms": {
+                        "field": "experiment.experimental_strategy"
+                      },
+                      "aggs": {
+                        "matchedNorm": {
+                          "terms": {
+                            "field": "samples.matchedNormalSubmitterSampleId",
+                            "missing": "N/A"
+                          }
+                        },
+                        "analysis_type": {
+                          "terms": {
+                            "field": "analysisType.name"
+                          },
+                          "aggs": {
+                            "analysis": {
+                              "terms": {
+                                "field": "analysisId"
+                              },
+                              "aggs": {
+                                "files": {
+                                  "nested": {
+                                    "path": "files"
+                                  },
+                                  "aggs": {
+                                    "filename": {
+                                      "terms": {
+                                        "field": "files.fileName"
+                                      },
+                                      "aggs": {
+                                        "file_type": {
+                                          "terms": {
+                                            "field": "files.fileType"
+                                          }
+                                        },
+                                        "data_type": {
+                                          "terms": {
+                                            "field": "files.dataType"
+                                          }
+                                        },
+                                        "data_category": {
+                                          "terms": {
+                                            "field": "files.info.data_category"
+                                          }
+                                        },
+                                        "data_subtypes": {
+                                          "terms": {
+                                            "field": "files.info.data_subtypes"
+                                          }
+                                        },
+                                        "analysis_tools": {
+                                          "terms": {
+                                            "field": "files.info.analysis_tools"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "readGroupCount": {
+                              "stats": {
+                                "field": "read_group_count"
+                              }
+                            },
+                            "inputAnalysis": {
+                              "terms": {
+                                "field": "workflow.inputs.input_analysis_id"
+                              }
+                            },
+                            "inputTumourAnalysis": {
+                              "terms": {
+                                "field": "workflow.inputs.tumour_analysis_id"
+                              }
+                            },
+                            "inputNormalAnalysis": {
+                              "terms": {
+                                "field": "workflow.inputs.normal_analysis_id"
+                              }
+                            },
+                            "matchedNorm": {
+                              "terms": {
+                                "field": "samples.matchedNormalSubmitterSampleId"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

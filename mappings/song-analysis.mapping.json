@@ -1,0 +1,189 @@
+{
+  "mappings": {
+    "dynamic": false,
+    "properties": {
+      "analysisId": {
+        "type": "keyword"
+      },
+      "analysisState": {
+        "type": "keyword"
+      },
+      "analysisType": {
+        "properties": {
+          "name": {
+            "type": "keyword"
+          },
+          "version": {
+            "type": "long"
+          }
+        }
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "experiment": {
+        "properties": {
+          "library_strategy": {
+            "type": "keyword"
+          },
+          "experimental_strategy": {
+            "type": "keyword"
+          }
+        }
+      },
+      "files": {
+        "type": "nested",
+        "properties": {
+          "dataType": {
+            "type": "keyword"
+          },
+          "fileAccess": {
+            "type": "keyword"
+          },
+          "fileMd5sum": {
+            "type": "keyword"
+          },
+          "fileName": {
+            "type": "keyword"
+          },
+          "fileSize": {
+            "type": "long"
+          },
+          "fileType": {
+            "type": "keyword"
+          },
+          "info": {
+            "properties": {
+              "analysis_tools": {
+                "type": "keyword"
+              },
+              "data_category": {
+                "type": "keyword"
+              },
+              "data_subtypes": {
+                "type": "keyword"
+              }
+            }
+          },
+          "objectId": {
+            "type": "keyword"
+          }
+        }
+      },
+      "firstPublishedAt": {
+        "type": "date"
+      },
+      "info": {
+        "properties": {
+          "origin": {
+            "type": "keyword"
+          }
+        }
+      },
+      "publishedAt": {
+        "type": "date"
+      },
+      "read_group_count": {
+        "type": "long"
+      },
+      "samples": {
+        "properties": {
+          "donor": {
+            "properties": {
+              "donorId": {
+                "type": "keyword"
+              },
+              "gender": {
+                "type": "keyword"
+              },
+              "submitterDonorId": {
+                "type": "keyword"
+              }
+            }
+          },
+          "matchedNormalSubmitterSampleId": {
+            "type": "keyword"
+          },
+          "sampleId": {
+            "type": "keyword"
+          },
+          "sampleType": {
+            "type": "keyword"
+          },
+          "specimen": {
+            "properties": {
+              "specimenId": {
+                "type": "keyword"
+              },
+              "specimenTissueSource": {
+                "type": "keyword"
+              },
+              "specimenType": {
+                "type": "keyword"
+              },
+              "submitterSpecimenId": {
+                "type": "keyword"
+              },
+              "tumourNormalDesignation": {
+                "type": "keyword"
+              }
+            }
+          },
+          "specimenId": {
+            "type": "keyword"
+          },
+          "submitterSampleId": {
+            "type": "keyword"
+          }
+        }
+      },
+      "studyId": {
+        "type": "keyword"
+      },
+      "updatedAt": {
+        "type": "date"
+      },
+      "variant_class": {
+        "type": "keyword"
+      },
+      "workflow": {
+        "properties": {
+          "genome_build": {
+            "type": "keyword"
+          },
+          "inputs": {
+            "properties": {
+              "analysis_type": {
+                "type": "keyword"
+              },
+              "input_analysis_id": {
+                "type": "keyword"
+              },
+              "normal_analysis_id": {
+                "type": "keyword"
+              },
+              "tumour_analysis_id": {
+                "type": "keyword"
+              }
+            }
+          },
+          "run_id": {
+            "type": "keyword"
+          },
+          "session_id": {
+            "type": "keyword"
+          },
+          "workflow_name": {
+            "type": "keyword"
+          },
+          "workflow_short_name": {
+            "type": "keyword"
+          },
+          "workflow_version": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
